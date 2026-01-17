@@ -1,0 +1,271 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>
+#include <ctime>
+#include <cmath>
+#include <iomanip>
+#include <vector>
+#include <cctype>
+#include <fstream>
+using namespace std;
+
+class clsCalculator
+{
+private:
+
+	float _Num = 0;
+	float _Result = 0;
+	string OpType;
+	string LastOp;
+	char Cancel = 'Y';
+	
+public:
+
+	float Add(float Num)
+	{
+		OpType = "+";
+		LastOp = "+";
+		_Num = Num;
+		_Result += _Num;
+		return _Result;
+	}
+
+	float Subtract(float Num)
+	{
+		OpType = "-";
+		LastOp = "-";
+		_Num = Num;
+		_Result -= _Num;
+		return _Result;
+	}
+
+	float Multiply(float Num)
+	{
+		OpType = "*";
+		LastOp = "*";
+		_Num = Num;
+		_Result *= _Num;
+		return _Result;
+	}
+
+	float Divide(float Num)
+	{
+		OpType = "/";
+		LastOp = "/";
+		if (Num == 0)
+			Num = 1;
+		_Num = Num;
+		_Result /= _Num;
+		return _Result;
+	}
+
+	void PrintResult()
+	{
+		if (OpType == "+")
+			cout << "Result after adding " << _Num << " is " << _Result << endl;
+		else if (OpType == "-")
+			cout << "Result after subtracting " << _Num << " is " << _Result << endl;
+		else if (OpType == "*")
+			cout << "Result after multiplying by " << _Num << " is " << _Result << endl;
+		else if (OpType == "/")
+			cout << "Result after dividing by " << _Num << " is " << _Result << endl;
+	}
+
+	void CancelLastOperation()
+	{
+		if (Cancel = 'Y')
+		{
+			cout << "Cannot cancel operation." << endl;
+			return;
+		}
+
+		if (LastOp == "+")
+		{
+			_Result -= _Num;
+			cout << "Result after cancelling is " << _Result << endl;
+			return;
+		}
+		else if (LastOp == "-")
+		{
+			_Result += _Num;
+			cout << "Result after cancelling is " << _Result << endl;
+			return;
+		}
+		else if (LastOp == "*")
+		{
+			_Result /= _Num;
+			cout << "Result after cancelling is " << _Result << endl;
+			return;
+		}
+		else if (LastOp == "/")
+		{
+			_Result *= _Num;
+			cout << "Result after cancelling is " << _Result << endl;
+			return;
+		}
+	}
+
+	void Clear()
+	{
+		_Num = 0;
+		_Result = 0;
+		cout << "Result cleared" << endl;
+	}
+
+};
+
+int main()
+{
+	clsCalculator Calculator1;
+
+	Calculator1.Clear();
+
+	Calculator1.Add(10);
+	Calculator1.PrintResult();
+
+	Calculator1.Add(100);
+	Calculator1.PrintResult();
+
+	Calculator1.Subtract(20);
+	Calculator1.PrintResult();
+
+	Calculator1.Divide(0);
+	Calculator1.PrintResult();
+
+	Calculator1.Divide(2);
+	Calculator1.PrintResult();
+
+	Calculator1.Multiply(3);
+	Calculator1.PrintResult();
+
+
+	Calculator1.Clear();
+
+	Calculator1.CancelLastOperation();
+}
+
+
+
+
+
+
+
+#include <iostream>
+#include <string>
+#include <cstdlib>
+#include <ctime>
+#include <cmath>
+#include <iomanip>
+#include <vector>
+#include <cctype>
+#include <fstream>
+using namespace std;
+
+class clsCalculator
+{
+private:
+
+	float _Num = 0;
+	float _Result = 0;
+	string _LastOperation = "Clear ";
+	float _PreviousResult = 0;
+	bool _IsZero(float Num)
+	{
+		return Num == 0;
+	}
+	
+public:
+
+	float Add(float Num)
+	{
+		_LastOperation = "Adding ";
+		_PreviousResult = _Result;
+		_Num = Num;
+		_Result += _Num;
+		return _Result;
+	}
+
+	float Subtract(float Num)
+	{
+		_LastOperation = "Subtracting ";
+		_PreviousResult = _Result;
+		_Num = Num;
+		_Result -= _Num;
+		return _Result;
+	}
+
+	float Multiply(float Num)
+	{
+		_LastOperation = "Multiplying by ";
+		_PreviousResult = _Result;
+		_Num = Num;
+		_Result *= _Num;
+		return _Result;
+	}
+
+	float Divide(float Num)
+	{
+		_LastOperation = "Dividing by ";
+		_PreviousResult = _Result;
+
+		if (_IsZero(Num))
+			Num = 1;
+
+		_Num = Num;
+		_Result /= _Num;
+		return _Result;
+	}
+
+	void PrintResult()
+	{
+		cout << "Result after " << _LastOperation << _Num << " is " << _Result << endl;
+	}
+
+	void CancelLastOperation()
+	{
+		_Num = 0;
+		_Result = _PreviousResult;
+		cout << "Result after cancelling last operation is " << _Result << endl;
+	}
+
+	void Clear()
+	{
+		_PreviousResult = 0;
+		_Num = 0;
+		_Result = 0;
+		cout << "Result after clearing is " << _Result << endl;
+	}
+
+	float GetFinalResult()
+	{
+		return _Result;
+	}
+
+};
+
+int main()
+{
+	clsCalculator Calculator1;
+
+	Calculator1.Add(10);
+	Calculator1.PrintResult();
+
+	Calculator1.Add(100);
+	Calculator1.PrintResult();
+
+	Calculator1.Subtract(20);
+	Calculator1.PrintResult();
+
+	Calculator1.Divide(0);
+	Calculator1.PrintResult();
+
+	Calculator1.Divide(2);
+	Calculator1.PrintResult();
+
+	Calculator1.Multiply(3);
+	Calculator1.PrintResult();
+
+	Calculator1.CancelLastOperation();
+
+	Calculator1.Clear();
+}
