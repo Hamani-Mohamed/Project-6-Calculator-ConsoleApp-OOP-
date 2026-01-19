@@ -1,5 +1,5 @@
 # 🧮 OOP Calculator – Encapsulation & Abstraction Demo
-
+## 📖 About the Project
 ### This project is a simple Calculator implemented in C++ as part of the 10th course on Abu-Hadhoud's ProgrammingAdvices Platform.
 The goal is to demonstrate the principles of Encapsulation and Abstraction using a single class.
 ## 🚀 Features
